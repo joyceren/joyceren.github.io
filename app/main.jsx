@@ -1,10 +1,10 @@
 'use strict'
 import '../public/stylesheet.css'
-import React, {Component} from 'react'
-import {Router, Route, IndexRedirect, browserHistory} from 'react-router'
-import {render} from 'react-dom'
-import {connect, Provider} from 'react-redux'
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react'
+import { Router, Route, IndexRedirect, browserHistory } from 'react-router'
+import { render } from 'react-dom'
+import { connect, Provider } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import { fetchArticles } from './reducers/articles'
 
@@ -28,7 +28,6 @@ const mapDispatch = (dispatch) => ({
 })
 
 class Main extends Component {
-
   componentDidMount() {
     this.props.loadInitialData()
   }
