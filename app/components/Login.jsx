@@ -11,10 +11,7 @@ export const Login = ({ login }) => (
   </form>
 )
 
-import {login} from 'APP/app/reducers/auth'
-import {connect} from 'react-redux'
+import { login } from 'APP/app/reducers/auth'
+import { connect } from 'react-redux'
 
-export default connect(
-  state => ({}),
-  {login},
-)(Login)
+export default connect(state => ({}), { login })(Login)

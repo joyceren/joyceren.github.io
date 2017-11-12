@@ -1,0 +1,39 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+body{
+  padding-top:10%;
+  padding-bottom: 10%;
+}
+
+div{
+  display:inherit;
+  align-items: center;
+  flex-flow: row wrap;
+}
+
+.article-image{
+  width: 200px;
+}
+
+.article-box{
+  border: thin solid lightgrey;
+  padding: 10px;
+}
+
+nav {
+  font-family: Monaco, Consolas, "Courier New", "Lucida Console", monospace;
+  color: white;
+  display: flex;
+  background-color: rgb(55, 60, 60);
+  padding: 30px;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
