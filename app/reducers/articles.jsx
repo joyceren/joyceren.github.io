@@ -8,7 +8,7 @@ const getArticles = articles => ({ type: GET_ARTICLES, articles })
 
 /* REDUCERS */
 
-export default function reducer (state=[], action) {
+export default function reducer(state=[], action) {
   switch (action.type) {
     case GET_ARTICLES:
       return action.articles

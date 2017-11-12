@@ -2,7 +2,7 @@ import React from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-const Articles = { articles } => {
+const Articles = ({ articles }) => {
   return articles.length
     ? <div>
       {
@@ -21,6 +21,6 @@ const Articles = { articles } => {
     </div>
 }
 
-const mapState = { articles } => ({ articles })
+const mapState = ({ articles }) => ({ articles })
 
 export default connect(mapState)(Articles)

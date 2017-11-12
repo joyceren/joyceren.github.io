@@ -16,12 +16,10 @@ import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
 
-const mapState = ({ auth }) => ({
-  user:auth
-})
+const mapState = ({ auth }) => ({ user:auth })
 
 const mapDispatch = (dispatch) => ({
-  loadInitialData () {
+  loadInitialData() {
     dispatch(fetchArticles())
     console.log('initial data loaded!')
   }
