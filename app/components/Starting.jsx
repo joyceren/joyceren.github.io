@@ -4,14 +4,16 @@ import { connect } from 'react-redux'
 
 const StartingPage = (props) => {
   console.log(props.children)
-  return (<div>
-    <Link to="/articles">
-      <div>
-      Your News
-      </div>
-    </Link>
-  </div>
-)}
+  return (
+    <div>
+      <Link to="/articles">
+        <div>
+        Your News
+        </div>
+      </Link>
+    </div>
+  )
+}
 
 const mapState = ({articles}) => ({
   articles,
