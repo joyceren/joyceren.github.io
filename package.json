@@ -8,9 +8,8 @@
   },
   "scripts": {
     "dev": "node dev",
-    "validate": "check-node-version --node '7.0.0'",
     "setup": "./bin/setup",
-    "prep": "npm run validate && npm run setup",
+    "prep": "npm run setup",
     "postinstall": "npm run prep",
     "build": "webpack",
     "build-watch": "npm run build -- -w",
