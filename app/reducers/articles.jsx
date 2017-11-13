@@ -11,7 +11,7 @@ const getArticles = articles => ({ type: GET_ARTICLES, articles })
 export default function reducer(state=[], action) {
   switch (action.type) {
     case GET_ARTICLES:
-      return action.articles
+      return [...state, ...action.articles]
     default:
       return state
   }
@@ -19,9 +19,9 @@ export default function reducer(state=[], action) {
 
 /* THUNK */
 
-export function fetchArticles() {
+export function fetchArticles(source) {
   return (dispatch) =>
-    axios.get(' https://newsapi.org/v1/articles?source=techcrunch&apiKey=12be6d006ecc4c40840e28ae12a7fd77')
+    axios.get(`https://newsapi.org/v1/articles?source=${source}&apiKey=12be6d006ecc4c40840e28ae12a7fd77`)
       .then(res => res.data)
       .then(({articles}) => dispatch(getArticles(articles)))
 }

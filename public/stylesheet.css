@@ -16,6 +16,12 @@ div{
   flex-flow: row wrap;
 }
 
+.sources-container{
+  display:flex;
+  flex-flow: row wrap;
+  padding-left: 5%;
+}
+
 .article-image{
   width: 200px;
 }
@@ -36,4 +42,44 @@ nav {
   position: fixed;
   top: 0;
   width: 100%;
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 10%;
+}
+
+.button:hover {
+    background-color: darkgreen; /* Green */
+    color: white;
+}
+
+.reset-button {
+    background-color: orange; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 10%;
+}
+
+.reset-button:hover {
+    background-color: darkorange; /* Green */
+    color: white;
+}
+
+.button-container{
+  padding-top: 20px;
+  display: flex;
+  align-content: center;
 }

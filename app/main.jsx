@@ -6,41 +6,44 @@ import { render } from 'react-dom'
 import { connect, Provider } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { fetchArticles } from './reducers/articles'
+import { fetchSources } from './reducers/sources'
+import { setFilterTerm } from './reducers/filterTerm'
 
 import store from './store'
 
 import Articles from './components/Articles'
-import Starting from './components/Starting'
+import Sources from './components/Sources'
 import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
 
-const mapState = ({ auth }) => ({ user: auth })
+const mapState = ({ auth, selectedSources }) => ({ user: auth, selectedSources })
 
 const mapDispatch = (dispatch) => ({
-  loadInitialData() {
-    dispatch(fetchArticles())
-    console.log('initial data loaded!')
+  loadInitialData(selectedSources) {
+    dispatch(fetchSources())
+  },
+  setNewFilterTerm(term){
+    dispatch(setFilterTerm(term))
   }
 })
 
 class Main extends Component {
   componentDidMount() {
-    this.props.loadInitialData()
+    this.props.loadInitialData(this.props.selectedSources)
   }
 
   render() {
-    const { user, children } = this.props
+    const { user, children, setNewFilterTerm } = this.props
     return (
       <div>
         <nav>
           <div>
             <h1>0-F-F: ZER0 F*CKS FOR...</h1>
-            <select>
-              <option value="Donald Trump">Donald Trump</option>
-              <option value="Terrorism">Terrorism</option>
-              <option value="Kim Kardashian">Kim Kardashian</option>
+            <select onChange={evt => setNewFilterTerm(evt.target.filterTerm.value)}>
+              <option name="filterTerm" value="Trump ">Donald Trump</option>
+              <option name="filterTerm" value="Terrorism ">Terrorism</option>
+              <option name="filterTerm" value="Kim Kardashian ">Kim Kardashian</option>
               <option>Other...</option>
             </select>
           </div>
@@ -61,7 +64,8 @@ render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
-        <Route exact path="/" component={Starting} />
+        <IndexRedirect to="/sources" />
+        <Route path="/sources" component={Sources} />
         <Route path="/articles" component={Articles} />
       </Route>
       <Route path='*' component={NotFound} />
