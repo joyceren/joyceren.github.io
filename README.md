@@ -1,8 +1,6 @@
 # Get started:
 
 ```
-git clone git@github.com:queerviolet/spark.git
-cd spark
 npm install
 npm start
 ```
