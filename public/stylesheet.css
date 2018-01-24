@@ -1,0 +1,23 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+}
+
+nav {
+  background-color: #033F63;
+  display: flex;
+  justify-content: space-between;
+  padding: 2%;
+}
+
+.main {
+  background-color: #F0F8FF;
+  padding: 2%;
+}
+
+.article-list {
+  padding: 2%;
+}
