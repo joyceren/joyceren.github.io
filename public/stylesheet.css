@@ -5,11 +5,28 @@
   text-decoration: none;
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
   background-color: whitesmoke;
+
 }
 
 .main {
   background-color: white;
-  padding: 2%;
+  padding: 1%;
+}
+
+/* ------------- DEFAULT BUTTONS ------------- */
+/* ------------- DEFAULT BUTTONS ------------- */
+/* ------------- DEFAULT BUTTONS ------------- */
+
+.nav-btn {
+  height: 50px;
+  padding: 15px;
+  border-radius: 5px;
+  color:dimgrey;
+  background-color: inherit;
+}
+
+.nav-btn:hover{
+  color: black;
 }
 
 /* ------------- NAVBAR ------------- */
@@ -18,29 +35,17 @@
 
 nav {
   background-color: whitesmoke;
+  color: slategrey;
+  padding: 1%;
   display: flex;
   justify-content: space-around;
-  color: slategrey;
-  padding: 2%;
-  border-bottom: 1px solid lightgrey;
-  /* box-shadow: 5px 5px 5px lightgrey; */
+  box-shadow: 5px 5px 5px lightgrey;
 }
 
-.navbar-button-container{
+.nav-btn-container{
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-self: center;
-}
-
-.navbar-button {
-  height: 50px;
-  padding: 15px;
-  border-radius: 5px;
-}
-
-.navbar-button:hover{
-  /* background-color: gainsboro; */
-  color: black;
 }
 
 .login-btn {
@@ -64,6 +69,18 @@ nav {
 
 .navbar-logo {
   height: 75px;
+}
+
+/* ------------- HOMEPAGE ------------- */
+/* ------------- HOMEPAGE ------------- */
+/* ------------- HOMEPAGE ------------- */
+
+.main-menu{
+  background-color: white;
+  color: black;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
 }
 
 .article-list {

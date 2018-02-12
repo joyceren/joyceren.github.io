@@ -11,12 +11,18 @@ export default () => {
   return (
     <nav>
       <img src='http://icons.iconarchive.com/icons/graphicloads/colorful-long-shadow/256/Power-icon.png' className='navbar-logo'/>
-      <div className="navbar-button-container">
-        <div className="navbar-button-container">
-          <div className='navbar-button login-btn'>log in</div>
-          <div className='navbar-button signup-btn'>sign up</div>
-        </div>
+      <div className="nav-btn-container">
+        <div className='nav-btn login-btn'>log in</div>
+        <div className='nav-btn signup-btn'>sign up</div>
       </div>
     </nav>
   )
 }
+
+/*
+<div className="nav-btn-container">
+  <div className='nav-btn'>Top Headlines</div>
+  <hr />
+  <div className='nav-btn'>Selected Sources</div>
+</div>
+*/
