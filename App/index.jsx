@@ -4,6 +4,7 @@ import {BrowserRouter as Router} from 'react-router-dom'
 import Homepage from './components/Homepage'
 import Navbar from './components/Navbar'
 import Article from './components/ArticlePage'
+import Footer from './components/Footer'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 export default () => {
@@ -17,6 +18,7 @@ export default () => {
             <Route exact path="/:articleId" component={Article} />
           </div>
         </Router>
+        <Footer />
       </div>
     </MuiThemeProvider>
   )

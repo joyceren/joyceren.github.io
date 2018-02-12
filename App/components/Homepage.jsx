@@ -1,27 +1,26 @@
 import React from 'react'
-import {Card, CardHeader, CardTitle, CardText} from 'material-ui/Card'
+import ArticleCard from './ArticleCard'
 
 export default () => {
   return (
     <div className="main">
-
-      <div className="main-menu">
+      <div className="intro">
+          Take control of your news.
+      </div>
+      <div className="nav-btn-container">
         <div className='nav-btn'>Top Headlines</div>
         <hr />
         <div className='nav-btn'>My Newsstand</div>
+        <hr />
+        <div className='nav-btn'>What You're Missing</div>
       </div>
-
-      <Card>
-        <CardHeader title="New York Times" showExpandableButton={true}/>
-        <CardTitle
-          title="Article Title"
-          subtitle="Author Name"
-          actAsExpander={true}
-        />
-        <CardText expandable={true}>
-          Blah blah blah...
-        </CardText>
-      </Card>
+      <div className= "article-list">
+        <ArticleCard />
+        <ArticleCard />
+        <ArticleCard />
+      </div>
     </div>
   )
 }
+
+// if not logged in, put in a hero card at top explaining what the site is
