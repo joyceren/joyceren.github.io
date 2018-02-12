@@ -4,18 +4,66 @@
   box-sizing: border-box;
   text-decoration: none;
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
-}
-
-nav {
-  background-color: #033F63;
-  display: flex;
-  justify-content: space-between;
-  padding: 2%;
+  background-color: whitesmoke;
 }
 
 .main {
-  background-color: #F0F8FF;
+  background-color: white;
   padding: 2%;
+}
+
+/* ------------- NAVBAR ------------- */
+/* ------------- NAVBAR ------------- */
+/* ------------- NAVBAR ------------- */
+
+nav {
+  background-color: whitesmoke;
+  display: flex;
+  justify-content: space-around;
+  color: slategrey;
+  padding: 2%;
+  border-bottom: 1px solid lightgrey;
+  /* box-shadow: 5px 5px 5px lightgrey; */
+}
+
+.navbar-button-container{
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
+}
+
+.navbar-button {
+  height: 50px;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.navbar-button:hover{
+  /* background-color: gainsboro; */
+  color: black;
+}
+
+.login-btn {
+  /* margin-left: 5%; */
+  color: lightblue;
+}
+
+.login-btn:hover{
+  color: skyblue;
+}
+
+.signup-btn {
+  background-color: lightblue;
+  color: white;
+}
+
+.signup-btn:hover{
+  background-color: skyblue;
+  color: white;
+}
+
+.navbar-logo {
+  height: 75px;
 }
 
 .article-list {

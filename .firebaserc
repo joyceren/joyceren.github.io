@@ -1,5 +1,6 @@
 {
   "projects": {
-    "data": "zero-f-for"
+    "data": "zero-f-for",
+    "database": "zero-f-for"
   }
 }
