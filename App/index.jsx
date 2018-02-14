@@ -6,23 +6,34 @@ import Navbar from './components/Navbar'
 import Article from './components/ArticlePage'
 import Account from'./components/Account'
 import Footer from './components/Footer'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux';
+import { createLogger } from 'redux-logger';
+import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import reducer from './reducers';
 
 // import firebaseui auth here
 // pass the user down as props to Navbar, Homepage and Account
 
+const store = createStore(
+  reducer,
+  composeWithDevTools(applyMiddleware(thunk, createLogger({ collapsed: true })))
+  )
+
 export default () => {
   return (
-    <MuiThemeProvider>
+    <Provider store={store}>
       <Router>
         <div>
           <Navbar />
           <Route exact path="/" component={Homepage} />
           <Route exact path="/account" component={Account} />
           <Route exact path="/article/:articleId" component={Article} />
+          <Route path="=*" component={() => (<div>Page not found</div>)} />
           <Footer />
         </div>
       </Router>
-    </MuiThemeProvider>
+    </Provider>
   )
 }

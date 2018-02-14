@@ -10,6 +10,7 @@
   padding-top: 1%;
   padding-left: 5%;
   padding-right: 5%;
+  padding-bottom: 5%;
   background-color: whitesmoke;
   /* height:88vh; */
 }
@@ -86,6 +87,7 @@ nav {
   padding-right: 5%;
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .intro {
@@ -134,13 +136,13 @@ nav {
 
 .article-card {
   background-color: white;
-  border-radius: 5px;
+  border-radius: 2px;
   box-shadow: 2px 2px 5px lightgrey;
   height: auto;
-  width: 30vw;
-  margin:2%;
+  width: 18vw;
+  margin:1%;
   color: dimgrey;
-  padding:20px;
+  padding:1%;
   max-height: 50vh;
   overflow: hidden;
 }
@@ -148,7 +150,7 @@ nav {
 .article-img{
   display: flex;
   justify-content: center;
-  height: 75%;
+  width: 100%;
   overflow: hidden;
   border-bottom: 1px solid lightgrey;
   margin-bottom: 5px;
@@ -156,7 +158,7 @@ nav {
 
 .card-title{
   color:#21272c;
-  font-size: 200%;
+  font-size: 150%;
   font-style: bold;
 }
 
@@ -164,6 +166,15 @@ nav {
   font-size: small;
   font-style: italic;
   color: lightgrey;
+}
+
+/* ------------- ARTICLE PAGE ----------------- */
+
+.article-page {
+  min-height: 50vh;
+  padding-left:10%;
+  padding-right:10%;
+  background-color: white;
 }
 
 .footer{
