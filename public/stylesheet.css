@@ -74,7 +74,7 @@ nav {
 }
 
 .navbar-logo:hover{
-  filter: drop-shadow(2px 2px 2px lightgrey)
+  filter: drop-shadow(2px 2px 5px lightgrey)
 }
 
 /* ------------- HOMEPAGE ------------- */
@@ -96,7 +96,36 @@ nav {
   align-items: center;
   justify-content: center;
   margin-bottom: 1%;
-  color: #374149;
+  /* color: #374149; */
+  color: white;
+}
+
+.auth-page{
+  display:flex;
+  justify-content: center;
+  height: 75vh;
+  background-color: whitesmoke;
+}
+
+.auth-intro{
+  width:50vw;
+  display: flex;
+  justify-content: center;
+  background-color: #8bd2da;
+}
+
+.auth-form{
+  width:50vw;
+  padding: 5%;
+}
+
+.form-box{
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+  background-color: white;
+  padding: 10%;
+  border: 1px solid lightgrey;
 }
 
 /* ------------- ARTICLE CARD ------------- */
@@ -107,11 +136,13 @@ nav {
   background-color: white;
   border-radius: 5px;
   box-shadow: 2px 2px 5px lightgrey;
-  height: 40vh;
-  width: 20vw;
+  height: auto;
+  width: 30vw;
   margin:2%;
   color: dimgrey;
   padding:20px;
+  max-height: 50vh;
+  overflow: hidden;
 }
 
 .article-img{
@@ -125,6 +156,14 @@ nav {
 
 .card-title{
   color:#21272c;
+  font-size: 200%;
+  font-style: bold;
+}
+
+.card-time{
+  font-size: small;
+  font-style: italic;
+  color: lightgrey;
 }
 
 .footer{
@@ -133,4 +172,5 @@ nav {
   justify-content: flex-end;
   padding-right:5%;
   align-items: center;
+  border-top: 1px solid lightgrey;
 }

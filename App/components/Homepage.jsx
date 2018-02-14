@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import ArticleCard from './ArticleCard'
 
-export default () => {
+const Homepage = () => {
   return (
     <div className="main">
       <div className="intro">
@@ -23,4 +24,15 @@ export default () => {
   )
 }
 
+const mapState = () => {}
+
+const mapDispatch = dispatch => ({
+
+})
+
+export default connect(mapState, mapDispatch)(Homepage)
+
 // if not logged in, put in a hero card at top explaining what the site is
+// refresh server every 30 seconds (2880x per day)
+// update articles from server
+// for now, clear past articles older than a day
