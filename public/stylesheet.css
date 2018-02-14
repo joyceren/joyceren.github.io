@@ -3,83 +3,185 @@
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 }
 
-body{
-  padding-top:10%;
-  padding-bottom: 10%;
-}
-
-div{
-  display:inherit;
-  align-items: center;
-  flex-flow: row wrap;
-}
-
-.sources-container{
-  display:flex;
-  flex-flow: row wrap;
+.main {
+  padding-top: 1%;
   padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 5%;
+  background-color: whitesmoke;
+  /* height:88vh; */
 }
 
-.article-image{
-  width: 200px;
+/* ------------- DEFAULT BUTTONS ------------- */
+/* ------------- DEFAULT BUTTONS ------------- */
+/* ------------- DEFAULT BUTTONS ------------- */
+
+.nav-btn {
+  height: 50px;
+  padding: 15px;
+  border-radius: 5px;
+  color:dimgrey;
+  background-color: inherit;
 }
 
-.article-box{
-  border: thin solid lightgrey;
-  padding: 10px;
+.nav-btn:hover{
+  color: #21272c;
 }
+
+/* ------------- NAVBAR ------------- */
+/* ------------- NAVBAR ------------- */
+/* ------------- NAVBAR ------------- */
 
 nav {
-  font-family: Monaco, Consolas, "Courier New", "Lucida Console", monospace;
+  background-color: whitesmoke;
+  color: slategrey;
+  padding:1%;
+  display: flex;
+  justify-content: space-around;
+  box-shadow: 0px 1px 5px gainsboro;
+  position: relative;
+}
+
+.nav-btn-container{
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+
+.login-btn {
+  /* margin-left: 5%; */
+  color: #8bd2da;
+}
+
+.login-btn:hover{
+  color: #3db5c2;
+}
+
+.signup-btn {
+  background-color: #8bd2da;
   color: white;
+}
+
+.signup-btn:hover{
+  background-color: #3db5c2;
+  color: white;
+}
+
+.navbar-logo {
+  height: 75px;
+}
+
+.navbar-logo:hover{
+  filter: drop-shadow(2px 2px 5px lightgrey)
+}
+
+/* ------------- HOMEPAGE ------------- */
+/* ------------- HOMEPAGE ------------- */
+/* ------------- HOMEPAGE ------------- */
+
+.article-list {
+  padding-left: 5%;
+  padding-right: 5%;
   display: flex;
-  background-color: rgb(55, 60, 60);
-  padding: 30px;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.intro {
+  background-color: #8bd2da;
+  /* background-image: url("https://www.gannett-cdn.com/-mm-/5cba60c618d7736737554365ca5c2c81f7167bde/c=0-212-2120-1410&r=x335&c=590x332/local/-/media/2018/02/01/USATODAY/USATODAY/636531011366578064-tax-online.jpg"); */
+  height: 40vh;
+  display: flex;
   align-items: center;
-  justify-content: space-between;
-  position: fixed;
-  top: 0;
-  width: 100%;
+  justify-content: center;
+  margin-bottom: 1%;
+  /* color: #374149; */
+  color: white;
 }
 
-.button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin-left: 10%;
+.auth-page{
+  display:flex;
+  justify-content: center;
+  height: 75vh;
+  background-color: whitesmoke;
 }
 
-.button:hover {
-    background-color: darkgreen; /* Green */
-    color: white;
-}
-
-.reset-button {
-    background-color: orange; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin-left: 10%;
-}
-
-.reset-button:hover {
-    background-color: darkorange; /* Green */
-    color: white;
-}
-
-.button-container{
-  padding-top: 20px;
+.auth-intro{
+  width:50vw;
   display: flex;
-  align-content: center;
+  justify-content: center;
+  background-color: #8bd2da;
+}
+
+.auth-form{
+  width:50vw;
+  padding: 5%;
+}
+
+.form-box{
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+  background-color: white;
+  padding: 10%;
+  border: 1px solid lightgrey;
+}
+
+/* ------------- ARTICLE CARD ------------- */
+/* ------------- ARTICLE CARD ------------- */
+/* ------------- ARTICLE CARD ------------- */
+
+.article-card {
+  background-color: white;
+  border-radius: 2px;
+  box-shadow: 2px 2px 5px lightgrey;
+  height: auto;
+  width: 18vw;
+  margin:1%;
+  color: dimgrey;
+  padding:1%;
+  max-height: 50vh;
+  overflow: hidden;
+}
+
+.article-img{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+  border-bottom: 1px solid lightgrey;
+  margin-bottom: 5px;
+}
+
+.card-title{
+  color:#21272c;
+  font-size: 150%;
+  font-style: bold;
+}
+
+.card-time{
+  font-size: small;
+  font-style: italic;
+  color: lightgrey;
+}
+
+/* ------------- ARTICLE PAGE ----------------- */
+
+.article-page {
+  min-height: 50vh;
+  padding-left:10%;
+  padding-right:10%;
+  background-color: white;
+}
+
+.footer{
+  height: 10vh;
+  display: flex;
+  justify-content: flex-end;
+  padding-right:5%;
+  align-items: center;
+  border-top: 1px solid lightgrey;
 }

@@ -1,79 +1,111 @@
 /**
- * Concurrently run our various dev tasks.
- *
- * Usage: node dev
- **/
+ * Run `firebase serve` and `webpack-dev-server` together, to get
+ * firebase routes and function emulation alongside webpack-dev-server's
+ * hot loading.
+ */
 
-const app = require('.')
-    , chalk = require('chalk'), {bold} = chalk
-    , {red, green, blue, cyan, yellow} = bold
-    , dev = module.exports = () => run({
-      server: task(app.package.scripts['start-watch'], {color: blue}),
-      build: task(app.package.scripts['build-watch'], {color: green}),
-      lint: task(app.package.scripts['lint-watch'], {color: cyan}),
-      test: task(app.package.scripts['test-watch'], {color: yellow})
+const debug = require('debug')('dev')
+    , {spawn: spawnChild} = require('child_process')
+    , thru = require('through2')
+    , chalk = require('chalk')
+    , strip = require('strip-ansi')
+    , colors = [chalk.cyan, chalk.green, chalk.magenta, chalk.blue]
+let nextColorIdx = 0
+    
+let resolveFirebaseUrl, hasStartedListening = false
+const firebaseUrl = new Promise(r => resolveFirebaseUrl = r).then(strip)
+
+// `firebase serve` prints a line that looks like this
+// when it starts listening:
+const localServerRe = /(?:Local server|Server listening): (.*)/
+
+const env = vars => ({
+      env: Object.assign(vars, process.env)
     })
+    , forceColor = env({FORCE_COLOR: 3})
 
-const taskEnvironment = (path=require('path')) => {
-  const env = {}
-  for (const key in process.env) {
-    env[key] = process.env[key]
-  }
-  Object.assign(env, {
-    NODE_ENV: 'development',
-    PATH: [ path.join(app.root, 'node_modules', '.bin')
-          , process.env.PATH ].join(path.delimiter)
+// Build functions
+spawn('🤖 build library',
+  'npm', ['run', 'watch-lib'], forceColor)
+    .toConsole()
+
+// Run `firebase serve`
+const firebaseServe = spawn('🔥  firebase serve',
+  'npx', ['firebase', 'serve', '--only', 'functions,hosting'], forceColor)
+
+// Scan through its output...
+firebaseServe.stdout
+  // We're looking for the line where firebase serve tells us
+  // what URL it's accessible at (usually localhost:5000, but it
+  // may have to pick another port). 
+  .pipe(thru(function (line, enc, cb) {
+    // To avoid confusion, we don't pass through stdout until 
+    // after the "listening" line has passed.
+    cb(null, hasStartedListening ? line : debug('%s', line))
+
+    // Is this the line telling us where the local server is?
+    const match = line.toString().match(localServerRe)
+
+    // If so, resolve the firebase url promise with the url,
+    // and start passing through lines.
+    if (match) {
+      resolveFirebaseUrl(match[1].trim())
+      hasStartedListening = true
+    }
+  }))
+  .pipe(process.stdout)
+
+// Pipe stderr from firebase serve to our stderr.
+firebaseServe.stderr.pipe(process.stderr)
+
+// Once `firebase serve` has started, launch webpack-dev-server
+// with the appropriate environment variables set.
+firebaseUrl
+  .then(FIREBASE_SERVE_URL => {
+    const devServer = spawn('🌍  webpack dev server',
+      'npx', ['webpack-dev-server', ...process.argv.slice(2)], {
+      env: Object.assign({
+        NODE_ENV: 'development',
+        FORCE_COLOR: 3,
+        FIREBASE_SERVE_URL
+      }, process.env)
+    }).toConsole()
   })
-  return env
+
+function spawn(label, ...args) {
+  const child = spawnChild(...args)
+
+  const labeler = labelerFor(label)
+
+  child
+    .on('exit', status => {
+      if (status) {
+        error(labeler('exited with status', status))
+      }
+      process.exit(status)
+    })
+  
+  child.stdout = child.stdout.pipe(labelWith(labeler))
+  child.stderr = child.stderr.pipe(labelWith(labeler))
+  child.toConsole = () => {
+    child.stdout.pipe(process.stdout)
+    child.stderr.pipe(process.stderr)
+  }  
+  
+  return child
 }
 
-function run(tasks) {
-  Object.keys(tasks)
-    .map(name => tasks[name](name))
+function labelerFor(label, color=colors[nextColorIdx++ % colors.length]) {
+  const coloredLabel = color(`[ ${label} ]\t`)
+  return (...message) => `${coloredLabel}${message.join(' ')}`
 }
 
-function task(command, {
-  spawn=require('child_process').spawn,
-  path=require('path'),
-  color
-}={}) {
-  return name => {
-    const stdout = log({name, color}, process.stdout)
-        , stderr = log({name, color, text: red}, process.stderr)
-        , proc = spawn(command, {
-          shell: true,
-          stdio: 'pipe',
-          env: taskEnvironment(),
-        }).on('error', stderr)
-          .on('exit', (code, signal) => {
-            stderr(`Exited with code ${code}`)
-            if (signal) stderr(`Exited with signal ${signal}`)
-          })
-    proc.stdout.on('data', stdout)
-    proc.stderr.on('data', stderr)
-  }
+function labelWith(labeler) {
+  return thru(function (line, enc, cb) {
+    cb(null, labeler(line))
+  })
 }
 
-function log({
-  name,
-  ts=timestamp,
-  color=none,
-  text=none,
-}, out=process.stdout) {
-  return data => data.toString()
-    // Strip out screen-clearing control sequences, which really
-    // muck up the output.
-    .replace('\u001b[2J', '')
-    .replace('\u001b[1;3H', '')
-    .split('\n')
-    .forEach(line => out.write(`${color(`${ts()} ${name}   \t⎹ `)}${text(line)}\n`))
+function error(...args) {
+  console.error(chalk.bold.red(...args))
 }
-
-const dateformat = require('dateformat')
-function timestamp() {
-  return dateformat('yyyy-mm-dd HH:MM:ss (Z)')
-}
-
-function none(x) { return x }
-
-if (module === require.main) { dev() }

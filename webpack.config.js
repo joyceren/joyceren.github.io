@@ -1,52 +1,80 @@
 'use strict'
+const webpack = require('webpack')
 
-const LiveReloadPlugin = require('webpack-livereload-plugin')
-    , devMode = require('.').isDevelopment
-
-/**
- * Fast source maps rebuild quickly during development, but only give a link
- * to the line where the error occurred. The stack trace will show the bundled
- * code, not the original code. Keep this on `false` for slower builds but
- * usable stack traces. Set to `true` if you want to speed up development.
- */
-
-    , USE_FAST_SOURCE_MAPS = false
-
-module.exports = {
-  entry: './app/main.jsx',
+const config = env => ({
+  entry: entries(env, './main.js'),
   output: {
-    path: __dirname,
-    filename: './public/bundle.js'
+    filename: 'bundle.js',
+    path: `${__dirname}/public`,
   },
-  context: __dirname,
-  devtool: devMode && USE_FAST_SOURCE_MAPS
-    ? 'cheap-module-eval-source-map'
-    : 'source-map',
+  devtool: 'source-map',
   resolve: {
-    extensions: ['.js', '.jsx', '.json', '*']
+    extensions: [ '.jsx', '.js', '.json' ],
+    alias: {
+      // This lets us use '~' to mean 'the root of the app' in import
+      // statements.
+      '~': __dirname
+    }
   },
+  devServer: devServer(env),
   module: {
-    rules: [
-      {
-        test: /jsx?$/,
-        exclude: /(node_modules|bower_components)/,
-        use: [{
-          loader: 'babel-loader',
-          options: {
-            presets: ['react', 'es2015', 'stage-2']
-          }
-        }]
-      },
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader',
-        ]
-      },
-    ]
+    rules: [{
+      test: /jsx?$/,
+      exclude: /node_modules/,
+      use: babel(env),
+    },
+    {
+      test: /\.(jpeg|jpg|png|)$/,
+      use: 'url-loader',
+    },
+    {
+      test: /\.css$/,
+      use: ['style-loader', 'css-loader']
+    },
+    {
+      test: /\.(txt|md|markdown)$/,
+      use: 'raw-loader',
+    }]
   },
-  plugins: devMode
-    ? [new LiveReloadPlugin({appendScriptTag: true})]
-    : []
+  plugins: plugins(env),
+})
+
+const isProd = ({NODE_ENV}) => NODE_ENV === 'production'
+const isHot = env => !isProd(env)
+
+const entries = (env, entry) =>
+  isHot(env)
+    ? ['react-hot-loader/patch', entry]
+    : entry
+
+const plugins = env => isHot(env) ? [
+  new webpack.HotModuleReplacementPlugin,  // Enable HMR globally
+  new webpack.NamedModulesPlugin,          // Better module names in the browser
+                                           // console on HMR updates
+  new webpack.NoEmitOnErrorsPlugin,        // Don't emit on errors.
+] : []
+
+function devServer(env) {
+  if (isProd(env)) return
+  const {FIREBASE_SERVE_URL} = env  
+  return {
+    hot: true,
+    proxy: FIREBASE_SERVE_URL && {
+      "/": FIREBASE_SERVE_URL
+    }
+  }
 }
+
+const babel = env => ({
+  loader: 'babel-loader', 
+  options: {
+    presets: [
+      ['env', {modules: false}],
+      'stage-2',
+      'react',
+    ],
+    plugins: isHot(env) && ['react-hot-loader/babel']
+  }
+})
+
+module.exports = config(process.env)
