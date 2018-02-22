@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 export default ({article, id}) => {
   const {title, publishedAt, urlToImage, url} = article,
   author = article.author || ''
+
   return (
     <Link to={`/article/${id}`}>
       <div className="article-card">

@@ -7,7 +7,13 @@ setup(firebase)
 export default firebase
 export const firestore = firebase.firestore()
 export const database = firebase.database()
+
 export const auth = firebase.auth()
+
+// generated providerID
+export const google = new firebase.auth.GoogleAuthProvider()
+export const email = new firebase.auth.EmailAuthProvider()
+
 export const storage = firebase.storage()
 
 // Export your models here. Example:

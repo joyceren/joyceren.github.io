@@ -1,42 +1,49 @@
-import React from 'react';
+import React from 'react'
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
+import {auth, google, email} from '~/fire'
 
-// props = {
-//   login: true || false
-// }
 
-// if props.login is true return login form
-// else return create account form
+export default class extends React.Component {
 
-export default props => {
-  let login = props.login
-  return (
-    <div className="auth-page">
-      <div className='auth-intro'>
-        Take control of your news.
-      </div>
-      <div className='auth-form'>
-      {
-        !login ?
-        (
-            <div className="form-box">
-              <form>
-                <input type="text" placeholder="email" />
-                <br />
-                <input type="password" placeholder="password" />
-                <br />
-                <input type="submit" />
-              </form>
-            </div>
-        )
-        : <h2>LOGIN</h2>
-      }
-        <div className="form-box">
-          Don't have an account?
-          <p onClick={testFunc}>Sign up.</p>
+  state = {
+    signedIn: false
+  }
+
+  uiConfig = {
+    signInFlow: 'popup',
+    signInOptions: [ google, email ],
+    callbacks: {
+      signInSuccess: () => false
+    }
+  }
+
+  componentDidMount() {
+    auth.onAuthStateChanged(
+        (user) => this.setState({signedIn: !!user})
+    );
+  }
+
+  render() {
+    if (!this.state.signedIn){
+      return (
+        <div className="auth-page">
+          <div className='auth-intro'>
+            Take control of your news.
+          </div>
+          <div className='auth-form'>
+            Please Sign In:
+            <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={auth} />
+          </div>
         </div>
+      )
+    }
+    return (
+      <div>
+        <h1>Welcome {auth.currentUser.displayName}! You are now signed-in!</h1>
+        <a onClick={() => auth.signOut()}>Sign-out</a>
       </div>
-    </div>
-  )
+    );
+  }
 }
 
 const testFunc = e => {

@@ -3,7 +3,7 @@ import axios from 'axios'
 import {connect} from 'react-redux'
 import ReactHtmlParser from 'react-html-parser'
 
-export default class extends Component {
+class ArticlePage extends Component {
   parseArticle(url) {
     axios.get(
         `https://mercury.postlight.com/parser?url=${url}`,
@@ -19,7 +19,9 @@ export default class extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
+    const {articleId} = this.props.match.params,
+      url = this.props.articles[articleId].url
+    this.parseArticle(url)
   }
 
   render() {
@@ -27,45 +29,15 @@ export default class extends Component {
       <div className='main'>
         <div className="article-page">
           <h2>{this.state && this.state.title}</h2>
+          {this.state && ReactHtmlParser(this.state.content)}
         </div>
       </div>
     )
   }
-
 }
 
+// at bottom of page, reveal the source of the news article
 
-// const ArticlePage = ({match, parseArticle, articles, parsed}) => {
-//
-//   const {url, title, publishedAt} = articles[match.params.articleId]
-//   const updatePage = () => parseArticle(url)
-//
-//   return (
-//     <div className='main'>
-//       <div className="article-page" onClick={updatePage}>
-//         <h2>{title}</h2>
-//         {parsed && ReactHtmlParser(parsed.content)}
-//       </div>
-//     </div>
-//   )
-// }
-//
-// const mapState = state => state
-//
-// const mapDispatch = dispatch => ({
-//   parseArticle (url) {
-//     axios.get(
-//         `https://mercury.postlight.com/parser?url=${url}`,
-//         {
-//           headers: {
-//             'content-type': 'application/json',
-//             'x-api-key': '7GjHxpveaOM0THd5BJpse5pL0v9QmdlWtoGEJygT'
-//           }
-//         }
-//       )
-//     .then(res => res.data)
-//     .then(parsed => {dispatch({type: "CONTENT", parsed})})
-//   }
-// })
-//
-// export default connect(mapState, mapDispatch)(ArticlePage)
+const mapState = state => state
+
+export default connect(mapState)(ArticlePage)

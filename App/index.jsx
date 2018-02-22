@@ -5,21 +5,13 @@ import Homepage from './components/Homepage'
 import Navbar from './components/Navbar'
 import Article from './components/ArticlePage'
 import Account from'./components/Account'
+import Auth from './components/Auth'
 import Footer from './components/Footer'
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux';
-import { createLogger } from 'redux-logger';
-import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import reducer from './reducers';
+import store from './store'
 
 // import firebaseui auth here
 // pass the user down as props to Navbar, Homepage and Account
-
-const store = createStore(
-  reducer,
-  composeWithDevTools(applyMiddleware(thunk, createLogger({ collapsed: true })))
-  )
 
 export default () => {
   return (
@@ -28,7 +20,7 @@ export default () => {
         <div>
           <Navbar />
           <Route exact path="/" component={Homepage} />
-          <Route exact path="/account" component={Account} />
+          <Route exact path="/account" component={Auth} />
           <Route exact path="/article/:articleId" component={Article} />
           <Route path="=*" component={() => (<div>Page not found</div>)} />
           <Footer />

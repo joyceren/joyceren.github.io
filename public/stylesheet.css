@@ -6,6 +6,10 @@
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 }
 
+img{
+  max-height: 50vh;
+}
+
 .main {
   padding-top: 1%;
   padding-left: 5%;
@@ -137,7 +141,7 @@ nav {
 .article-card {
   background-color: white;
   border-radius: 2px;
-  box-shadow: 2px 2px 5px lightgrey;
+  /* box-shadow: 2px 2px 5px lightgrey; */
   height: auto;
   width: 18vw;
   margin:1%;
@@ -154,6 +158,7 @@ nav {
   overflow: hidden;
   border-bottom: 1px solid lightgrey;
   margin-bottom: 5px;
+  max-height: 200px;
 }
 
 .card-title{
@@ -172,9 +177,12 @@ nav {
 
 .article-page {
   min-height: 50vh;
+  padding-top: 5%;
   padding-left:10%;
   padding-right:10%;
+  padding-bottom: 5%;
   background-color: white;
+  line-height: 200%;
 }
 
 .footer{
