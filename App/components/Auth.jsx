@@ -1,6 +1,6 @@
 import React from 'react'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
-import {auth, google, email} from '~/fire'
+import firebase, { auth } from '~/fire'
 
 
 export default class extends React.Component {
@@ -11,7 +11,10 @@ export default class extends React.Component {
 
   uiConfig = {
     signInFlow: 'popup',
-    signInOptions: [ google, email ],
+    signInOptions: [
+      firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID
+    ],
     callbacks: {
       signInSuccess: () => false
     }
