@@ -1,6 +1,7 @@
 import React from 'react'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import firebase, { auth } from '~/fire'
+import UserProfile from './UserProfile'
 
 
 export default class extends React.Component {
@@ -40,12 +41,12 @@ export default class extends React.Component {
         </div>
       )
     }
-    return (
-      <div>
-        <h1>Welcome {auth.currentUser.displayName}! You are now signed-in!</h1>
-        <a onClick={() => auth.signOut()}>Sign-out</a>
-      </div>
-    );
+    return <UserProfile user={auth.currentUser} />
+      // <div>
+      //   <h1>Welcome {auth.currentUser.displayName}! You are now signed-in!</h1>
+      //   <a onClick={() => auth.signOut()}>Sign-out</a>
+      // </div>
+
   }
 }
 

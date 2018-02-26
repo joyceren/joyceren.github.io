@@ -193,3 +193,55 @@ nav {
   align-items: center;
   border-top: 1px solid lightgrey;
 }
+
+/* ------------- ACCOUNT PAGE ----------------- */
+
+.account-page{
+  display:flex;
+}
+
+.account-left{
+  width: 60%;
+}
+
+.account-right{
+  width: 30%;
+  background-color: #8bd2da;
+  padding: 20px;
+}
+
+.saved-sources{
+  border-radius: 2px;
+  padding:10px;
+  border: 1px solid lightgrey;
+  background-color: white;
+}
+
+.source-name:hover{
+  font-style: italic;
+}
+
+.selected{
+  color:red;
+}
+
+.sign-in-box{
+  display: flex;
+  justify-content: center;
+  padding: 5%;
+  top: 20%;
+  left: 25%;
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  background-color: white;
+  border-radius: 1px;
+  box-shadow: 10px 10px 10px lightgrey;
+}
+
+.overlay{
+  width: 100%;
+  height: 100%;
+  background-color: #0000;
+  opacity: 1;
+}

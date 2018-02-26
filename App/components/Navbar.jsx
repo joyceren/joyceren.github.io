@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { auth } from '~/fire'
+import firebase, { auth } from '~/fire'
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 
 export default class extends React.Component {
   state = {
-    signedIn: false
+    signedIn: false,
   }
 
   componentDidMount() {

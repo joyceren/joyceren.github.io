@@ -18,3 +18,5 @@ export const storage = firebase.storage()
 
 // Export your models here. Example:
 export const userById = id => db.collection('users').doc(id)
+
+export const sources = userId => db.collection('sources').doc(userId)
