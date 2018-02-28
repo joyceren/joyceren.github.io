@@ -1,7 +1,7 @@
 import React from 'react'
 import ArticleCard from './ArticleCard'
 import axios from 'axios'
-import {newsKey} from '../keys'
+import {newsKey} from '~/keys'
 
 export default class Homepage extends React.Component {
 
