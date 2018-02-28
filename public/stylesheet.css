@@ -35,6 +35,10 @@ img{
   color: #21272c;
 }
 
+.nav-selected{
+  color: #21272c;
+}
+
 /* ------------- NAVBAR ------------- */
 /* ------------- NAVBAR ------------- */
 /* ------------- NAVBAR ------------- */
@@ -106,6 +110,12 @@ nav {
   color: white;
 }
 
+
+/* ------------- LOGIN PAGE ----------------- */
+/* ------------- LOGIN PAGE ----------------- */
+/* ------------- LOGIN PAGE ----------------- */
+
+
 .auth-page{
   display:flex;
   justify-content: center;
@@ -118,6 +128,8 @@ nav {
   display: flex;
   justify-content: center;
   background-color: #8bd2da;
+  align-items: center;
+  color:white;
 }
 
 .auth-form{
@@ -174,6 +186,8 @@ nav {
 }
 
 /* ------------- ARTICLE PAGE ----------------- */
+/* ------------- ARTICLE PAGE ----------------- */
+/* ------------- ARTICLE PAGE ----------------- */
 
 .article-page {
   min-height: 50vh;
@@ -194,6 +208,8 @@ nav {
   border-top: 1px solid lightgrey;
 }
 
+/* ------------- ACCOUNT PAGE ----------------- */
+/* ------------- ACCOUNT PAGE ----------------- */
 /* ------------- ACCOUNT PAGE ----------------- */
 
 .account-page{
