@@ -266,3 +266,48 @@ nav {
   background-color: #0000;
   opacity: 1;
 }
+
+
+/* ------------- RESPONSIVE DESIGN ----------------- */
+/* ------------- RESPONSIVE DESIGN ----------------- */
+/* ------------- RESPONSIVE DESIGN ----------------- */
+
+
+@media (max-width: 414px){
+  .article-card{
+    width: 100%;
+  }
+
+  nav{
+    height: 10%;
+  }
+
+  .navbar-logo{
+    height: 8vh;
+  }
+
+  .nav-btn{
+    height: 5%;
+    font-size:50%;
+  }
+
+  .card-title{
+    font-size: 80%;
+  }
+
+  .card-time{
+    font-size:50%;
+  }
+
+  .nav-btn-container{
+    overflow: scroll;
+  }
+
+  .auth-intro{
+    display: none;
+  }
+
+  .auth-form{
+    width: 100%;
+  }
+}
