@@ -5,18 +5,18 @@ import setup from './setup'
 setup(firebase)
 
 export default firebase
-export const firestore = firebase.firestore()
-export const database = firebase.database()
+export const db = firebase.firestore()
 
+// authentication
 export const auth = firebase.auth()
+export const emailID = firebase.auth.EmailAuthProvider.PROVIDER_ID
+export const googleID = firebase.auth.GoogleAuthProvider.PROVIDER_ID
 
-// generated providerID
-export const google = new firebase.auth.GoogleAuthProvider()
-export const email = new firebase.auth.EmailAuthProvider()
+// models
+export const profiles = userId => db.collection('profiles').doc(userId)
+export const testProfile = () => db.collection('profiles').doc('1')
 
-export const storage = firebase.storage()
-
-// Export your models here. Example:
-export const userById = id => db.collection('users').doc(id)
-
-export const sources = userId => db.collection('sources').doc(userId)
+export const profilesById = (userId = '1') => (
+  db.collection('profiles').doc(userId).get()
+  .then(res => res.data())
+)

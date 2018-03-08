@@ -6,12 +6,12 @@ import {newsKey} from '~/keys'
 export default class Homepage extends React.Component {
 
   state = {
-    articles: [],
     sources: ['bbc-news', 'abc-news', 'techcrunch'], // filler for now
   }
 
   componentDidMount() {
-    if(this.props.currentView=='My Newsstand'){
+    console.log(this.props.currentView)
+    if(this.props.currentView=='Personalized Newsstand'){
       this.state.sources.forEach(source => {
         axios.get(`https://newsapi.org/v2/top-headlines?sources=${source}&apiKey=${newsKey}`)
           .then(res => res.data)
@@ -44,6 +44,7 @@ export default class Homepage extends React.Component {
   }
 
   render() {
+    if(!this.state.articles) return null
     return (
       <div className= "article-list">
         {this.state.articles.map((a, i) => <ArticleCard article={a} id={i} key={i}/>)}

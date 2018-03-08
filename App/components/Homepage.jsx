@@ -7,22 +7,25 @@ import NavBtn from './NavBtn'
 class Homepage extends Component {
 
   state = {
-    currentView: 'Top Headlines', // also 'userNews' and 'missing'
-    profiles: ["Top Headlines", 'My Newsstand', 'Happy News']
+    currentView: 'Top Headlines'
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(this.props !== nextProps) this.props=nextProps
   }
 
   render() {
-    const {currentView, profiles} = this.state
+    if(!this.props || !this.state) return null
+    const {currentView} = this.state
+    const {profiles, signedIn} = this.props
     return (
       <div className="main">
-        <div className="intro">
-            Take control of your news.
-        </div>
+        {!signedIn ? <div className="intro">Take control of your news.</div>:null}
 
         <div className="nav-btn-container">
-          {profiles.map(p => (
+          {profiles && Object.keys(profiles).map(p => (
             <div className="nav-btn-container">
-              <NavBtn key={p} label={p} selected={currentView=={p}} onClick={()=>this.setState({currentView: p})} />
+              <NavBtn key={p} label={p} selected={currentView===p} onClick={()=>this.setState({currentView: p})} />
               <hr />
             </div>
           ))}
@@ -37,7 +40,7 @@ class Homepage extends Component {
 }
 
 
-export default Homepage
+export default UserInfo(Homepage)
 
 // if not logged in, put in a hero card at top explaining what the site is
 // refresh server every 30 seconds (2880x per day)
