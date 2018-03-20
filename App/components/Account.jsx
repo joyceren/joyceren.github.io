@@ -4,16 +4,16 @@ import { auth, googleID, emailID } from '~/fire'
 import UserInfo from './UserInfo'
 
 const uiConfig = {
-  signInFlow: 'popup',
+  signInFlow: 'redirect',
   signInOptions: [emailID, googleID],
   callbacks: {
-    signInSuccess: () => false
-  }
+    signInSuccess: '/account'
+  },
+  credentialHelper: 'none'
 }
 
 const Account = props => {
-  if(!props) return null
-  else if(!props.signedIn){
+  if(!props.signedIn){
     return (
       <div className="auth-page">
         <div className='auth-intro'>
@@ -27,6 +27,7 @@ const Account = props => {
     )
   }
   else {
+    console.log(props.profiles)
     return (
       <div className='main'>
         <h1>Welcome {props.userName}!</h1>

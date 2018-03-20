@@ -4,6 +4,7 @@ import {BrowserRouter as Router} from 'react-router-dom'
 import Homepage from './components/Homepage'
 import Navbar from './components/Navbar'
 import Article from './components/ArticlePage'
+import ArticleList from './components/ArticleList'
 import Account from'./components/Account'
 import Footer from './components/Footer'
 import { Provider } from 'react-redux'
@@ -20,6 +21,7 @@ export default () => {
           <Navbar />
           <Route exact path="/" component={Homepage} />
           <Route exact path="/account" component={Account} />
+          <Route exact path='/:uid/:profileName' component={ArticleList} />
           <Route exact path="/article/:articleId" component={Article} />
           <Route path="=*" component={() => (<div>Page not found</div>)} />
           <Footer />

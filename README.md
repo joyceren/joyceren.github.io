@@ -1,58 +1,39 @@
-# Get started:
+# Taking back control of your news:
 
-```
-npm install
-npm start
-```
+Are you unhappy with how your online newsstands recommendations?
 
-# Frontend
+Do you feel like your online newsstands are encouraging your bad habits by continuously showing you click bait?
 
-The frontend starts in [`main.js`](./main.js). The root of the react app
-is in [`App.jsx`](./App.jsx).
+Do you want to check your biases and have a better awareness of the news you're not being exposed to?
 
-# a word about ~
+Are you getting bummed out by politics and just want to switch to happy news for a while but then switch back eventually?
 
-The webpack config aliases `~` to mean "the root of the app". For example,
-you can `import firebase from '~/fire'` anywhere in your app, without
-worrying about how many `..`s to have in your relative path.
+Well have I got the app for you!
 
-# Firebase
+## Try this newsstand [here](turn0ff.joyceren.com) at:
 
-Firebase is setup in [`fire/index.js`](./fire/index.js). Your config will
-get written to [`fire/setup.js`](./fire/setup.js) after you run `npm install`.
+<turn0ff.joyceren.com>
 
-You can import the various Firebase APIs from `~/fire`. For instance:
+## Tech-y Tech:
 
-```js
-  import firebase, {auth} from '~/fire'
+React, Redux, Firebase.
 
-  const google = firebase.auth.GoogleAuthProvider
-  auth.signInWithPopup(google)
-```
+Firebase API's are in the `fire` folder, Cloud Function imports/exports are done in the `lib` folder.
+~/ points to the root of the app
 
-# Functions
+`npm start` to start
 
-Write your [Cloud Functions](https://firebase.google.com/docs/functions/) in
-[`functions/index.js`](./functions/index.js).
+## Developer:
 
-You can require node modules from Cloud Functions normally. Be sure to `npm install` them
-*inside* the functions directory (it has its own `package.json`).
+Hi! I'm Joyce and I made this because I was getting depressed about all the stupid Trump news that I was getting and I wanted to just read celebrity gossip about Selena Gomez getting back with Justin Beiber until I recovered.
 
-Sadly, you can't use `import` statements, and you can't `require` code that does.
-Don't despair, the library provides a workaround.
+Unfortunately, this made my entire newsfeed consist of stupid shit, and _the algorithm_ completely cut me off from the entire world of politics.
 
-## The Library
+This made me realize just how much control _the algorithm_ had on what I see, and I started wondering what else was being filtered out of my news without my knowledge. (Kind of a hot button issue nowadays.) This doesn't mean I always want to read it, but it's good to know what's beyond your blinders.
 
-The library is defined in [`lib/index.js`](lib/index.js). In the library, you
-can `import` code from your project normally, and anything you `export` will be
-available to your Cloud Functions.
+It's kind of a pain in the ass to have to filter through the internet without the help of a computer brain, but it's better for our minds and our perspectives in the long run, I promise! Just like exercising and eating vegetables.
 
-It is a bridge between Cloud Function code and the rest of your
-project's code.
+So eat your vegetables, folks, and exercise your brain a bit!
 
-# Hot loading
-
-Hot module replacement is enabled, and the react-hot-loader plugins are applied.
-
-Your React components will update in place after you save them, without losing
-their state.
+### Please don't read my blog:
+[website](joyceren.com)

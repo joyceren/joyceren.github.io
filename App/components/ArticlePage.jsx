@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import ReactHtmlParser from 'react-html-parser'
+import {articleById} from '~/fire'
 
 class ArticlePage extends Component {
   parseArticle(url) {
@@ -19,9 +20,10 @@ class ArticlePage extends Component {
   }
 
   componentDidMount() {
-    const {articleId} = this.props.match.params,
-      url = this.props.articles[articleId].url
-    this.parseArticle(url)
+    const {articleId} = this.props.match.params
+    articleById(articleId).then(a =>
+      this.setState({content:this.parseArticle(a.url)})
+    )
   }
 
   render() {
@@ -38,6 +40,5 @@ class ArticlePage extends Component {
 
 // at bottom of page, reveal the source of the news article
 
-const mapState = state => state
 
-export default connect(mapState)(ArticlePage)
+export default ArticlePage
