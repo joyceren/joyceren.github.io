@@ -15,7 +15,7 @@ class Homepage extends Component {
   }
 
   render() {
-    if(!this.props || !this.state) return null
+    if(!this.props || !this.state.currentView) return null
     const {currentView} = this.state
     const {profiles, signedIn} = this.props
     return (
@@ -32,7 +32,7 @@ class Homepage extends Component {
           <NavBtn key={"What You\'re Missing"} label={"What You\'re Missing"} selected={currentView=="What You\'re Missing"} onClick={()=>this.setState({currentView: "What You\'re Missing"})} />
         </div>
 
-        <ArticleList currentView={currentView}/>
+        <ArticleList currentView={currentView} profileSources={currentView=="What You\'re Missing" ? null :this.props.profiles[currentView].sources}/>
 
       </div>
     )

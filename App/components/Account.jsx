@@ -38,6 +38,7 @@ const Account = props => {
           <div className="account-right">
             <h3>Your profiles:</h3>
             {props.profiles ? Object.keys(props.profiles).map(name => <div key={name}>{name}</div>):null}
+            <div className="signup-btn">Add Profile</div>
           </div>
         </div>
       </div>

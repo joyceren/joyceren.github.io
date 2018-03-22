@@ -20,6 +20,13 @@ export const profilesById = (uid = '1') => (
   })
 )
 
+export const addProfile = (uid, profileName, newProfileObj) => {
+  db.collection('profiles').doc(uid).update({
+    [profileName]: newProfileObj
+  })
+  .catch(console.error)
+}
+
 export const addArticles = articles => {
   console.log("adding articles")
   articles.forEach(article => {
