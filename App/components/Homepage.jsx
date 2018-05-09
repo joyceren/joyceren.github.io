@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import UserInfo from'./UserInfo'
-import ArticleList from './ArticleList'
+import NewsProfile from './NewsProfile'
 import NavBtn from './NavBtn'
 
 class Homepage extends Component {
@@ -17,7 +17,8 @@ class Homepage extends Component {
   render() {
     if(!this.props || !this.state.currentView) return null
     const {currentView} = this.state
-    const {profiles, signedIn} = this.props
+    const profiles = this.props.profiles || null
+    const signedIn = this.props.signedIn || null
     return (
       <div className="main">
         {!signedIn ? <div className="intro">Take control of your news.</div>:null}
@@ -30,9 +31,10 @@ class Homepage extends Component {
             </div>
           ))}
           <NavBtn key={"What You\'re Missing"} label={"What You\'re Missing"} selected={currentView=="What You\'re Missing"} onClick={()=>this.setState({currentView: "What You\'re Missing"})} />
+          <div className="nav-btn sign">Add New Profile</div>
         </div>
 
-        <ArticleList currentView={currentView} profileSources={currentView=="What You\'re Missing" ? null :this.props.profiles[currentView].sources}/>
+        <NewsProfile currentView={currentView} profileSources={currentView=="What You\'re Missing" ? null :this.props.profiles[currentView].sources}/>
 
       </div>
     )

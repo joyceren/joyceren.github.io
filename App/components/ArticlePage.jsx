@@ -36,6 +36,7 @@ class ArticlePage extends Component {
   }
 
   render() {
+    console.log(this.state.parsed)
     if(!this.state) return null
     return (
       <div className='main'>
