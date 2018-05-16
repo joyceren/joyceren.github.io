@@ -11,6 +11,10 @@ export const db = firebase.firestore()
 export const auth = firebase.auth()
 export const emailID = firebase.auth.EmailAuthProvider.PROVIDER_ID
 export const googleID = firebase.auth.GoogleAuthProvider.PROVIDER_ID
+export const google = new firebase.auth.GoogleAuthProvider()
+
+
+
 
 // models
 export const profilesById = (uid = '1') => (

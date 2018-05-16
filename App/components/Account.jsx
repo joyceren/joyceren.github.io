@@ -1,7 +1,6 @@
 import React from 'react'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import { auth, googleID, emailID } from '~/fire'
-import UserInfo from './UserInfo'
 
 const uiConfig = {
   signInFlow: 'redirect',
@@ -46,4 +45,4 @@ const Account = props => {
   }
 }
 
-export default UserInfo(Account)
+export default Account

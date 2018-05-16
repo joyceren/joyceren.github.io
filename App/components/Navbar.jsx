@@ -1,30 +1,38 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import UserInfo from './UserInfo'
-// import userPic from '~/public/user-icon.png'
+import unpluggedPic from '~/public/unplugged.png'
+import userPic from '~/public/user-icon.png'
 
 const Navbar = props => {
+
+  // takes in props:
+  // signedIn
+
   if(!props) return null
   return (
     <nav>
-      <Link to='/'>
-        <img src='http://icons.iconarchive.com/icons/graphicloads/colorful-long-shadow/256/Power-icon.png' className='navbar-logo'/>
+      <Link to='/' className="logo-box">
+        <img src={unpluggedPic} className='navbar-logo'/>
+        <h1>filter bubble</h1>
       </Link>
       { props.signedIn ?
+        //signed in
           <div className="nav-btn-container">
             <Link to='/account' className='nav-btn login-btn'>account</Link>
-            <Link to='/account'className='nav-btn login-btn' onClick={props.signOut}>log out</Link>
+            <div className='nav-btn login-btn' onClick={props.signOut}>log out</div>
           </div>
-        : (
+        : 
+        //not signed in
           <div className="nav-btn-container">
-            <Link to='/account' className='nav-btn login-btn'>log in</Link>
+            <Link to='/account/log-in' className='nav-btn login-btn'>log in</Link>
             <Link to='/account' className='nav-btn signup-btn'>sign up</Link>
           </div>
-        )
       }
     </nav>
   )
 }
 
 
-export default UserInfo(Navbar)
+export default Navbar
+
+

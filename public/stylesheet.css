@@ -6,6 +6,10 @@
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 }
 
+a{
+  color:#21272c;
+}
+
 img{
   max-height: 50vh;
 }
@@ -24,10 +28,8 @@ img{
 /* ------------- DEFAULT BUTTONS ------------- */
 
 .nav-btn {
-  height: 50px;
-  padding: 15px;
   border-radius: 5px;
-  color:dimgrey;
+  color: rgb(156, 154, 154);
   background-color: inherit;
 }
 
@@ -36,7 +38,8 @@ img{
 }
 
 .nav-selected{
-  color: #21272c;
+  color:black;
+  font-style: bold;
 }
 
 /* ------------- NAVBAR ------------- */
@@ -49,8 +52,13 @@ nav {
   padding:1%;
   display: flex;
   justify-content: space-around;
-  box-shadow: 0px 1px 5px gainsboro;
-  position: relative;
+  box-shadow: 0px 1px 5px lightgrey;
+}
+
+.sticky-nav {
+  position: sticky;
+  top: 0;
+  overflow-x: scroll;
 }
 
 .nav-btn-container{
@@ -61,29 +69,38 @@ nav {
 
 .login-btn {
   /* margin-left: 5%; */
-  color: #8bd2da;
+  color: #0992a1;
+  padding:15px;
 }
 
 .login-btn:hover{
-  color: #3db5c2;
+  color: #1b6269;
 }
 
 .signup-btn {
-  background-color: #8bd2da;
+  background-color: #0992a1;
   color: white;
+  padding:15px;
 }
 
 .signup-btn:hover{
-  background-color: #3db5c2;
+  background-color: #23828d;
   color: white;
+}
+
+.logo-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-box:hover{
+  filter: drop-shadow(2px 2px 5px lightgrey)
 }
 
 .navbar-logo {
   height: 75px;
-}
-
-.navbar-logo:hover{
-  filter: drop-shadow(2px 2px 5px lightgrey)
+  padding-right: 1vw;
 }
 
 .navbar-profile-pic{
@@ -103,16 +120,33 @@ nav {
   flex-wrap: wrap;
 }
 
-.intro {
-  background-color: #8bd2da;
-  /* background-image: url("https://www.gannett-cdn.com/-mm-/5cba60c618d7736737554365ca5c2c81f7167bde/c=0-212-2120-1410&r=x335&c=590x332/local/-/media/2018/02/01/USATODAY/USATODAY/636531011366578064-tax-online.jpg"); */
-  height: 40vh;
+.hero {
+  background-color: #0992a1;
+  background-image: url("https://www.found.co.uk/wp-content/uploads/2017/04/filter-bubble-v2.png");
+  background-size: cover;
+  height: 50vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1%;
   /* color: #374149; */
   color: white;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 1%;
+  right: 1%;
+}
+
+.close-btn:hover {
+  color: lightgrey;
+}
+
+.news-profile{
+  background-color: white;
+  min-height: 80vh;
+  padding: 10px;
 }
 
 
@@ -132,7 +166,7 @@ nav {
   width:50vw;
   display: flex;
   justify-content: center;
-  background-color: #8bd2da;
+  background-color: #0992a1;
   align-items: center;
   color:white;
 }
@@ -227,7 +261,7 @@ nav {
 
 .account-right{
   width: 30%;
-  background-color: #8bd2da;
+  background-color: #0992a1;
   padding: 20px;
 }
 
