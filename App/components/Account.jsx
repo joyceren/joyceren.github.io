@@ -26,7 +26,6 @@ const Account = props => {
     )
   }
   else {
-    console.log(props.profiles)
     return (
       <div className='main'>
         <h1>Welcome {props.userName}!</h1>

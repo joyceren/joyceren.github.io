@@ -21,14 +21,21 @@ export default class extends Component {
 
   state = {
     signedIn: null,
-    profiles: (Math.random()*9)+1,
-    displaySignedInBanner: true,
+    profiles: {a1:"Test-Profile1", a2:"Test-Profile2", a3:"Test-Profile3"},
+    displaySignUpBanner: true,
   }
 
   componentDidMount(){
+    // let sampleProfiles = []
+
+    // for(let i = 1; i<(Math.random()*9)+1; i++) {
+    //     sampleProfiles.push("ExampleLink"+i)
+    // }
+    // this.setState({profiles:sampleProfiles})
+    
     this.unsubscribe = auth.onAuthStateChanged(
       user => {
-        this.setState({signedIn: !!user, displaySignedInBanner: !user})
+        this.setState({signedIn: !!user, displaySignUpBanner: !user})
       }
     )
   }
@@ -51,17 +58,17 @@ export default class extends Component {
         <Router>
           <div>
             <Navbar signedIn={this.state.signedIn} signOut={this.signOut}/>
-            {this.state.displaySignedInBanner ? <Hero close={() => this.setState({displaySignedInBanner:false})} /> : null }
 
             <Switch>
-              <Redirect from='/' to='/ExampleLink1' exact={true}/>
-              <Route exact path='/:profileName' render={(p) => (
+              <Redirect from='/' to={"/"+Object.keys(this.state.profiles)[0]} exact={true}/>
+              <Route exact path='/:profileId' render={(p) => (
                 <div>
+                  {this.state.displaySignUpBanner ? <Hero close={() => this.setState({displaySignUpBanner:false})} /> : null }
                   <StickyNav profiles={this.state.profiles} />
                   <NewsProfile {...p} signedIn={this.state.signedIn} />
                 </div>
               )} />
-              <Route exact path="/account/:userId" component={Account} />
+              <Route exact path="/account/log-in" component={Account} />
               <Route exact path="/article/:articleId" component={Article} />
             </Switch>
 

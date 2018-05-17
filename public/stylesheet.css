@@ -42,6 +42,21 @@ img{
   font-style: bold;
 }
 
+.remove-btn {
+  border-radius: 50%;
+  border: 1px solid lightgrey;
+  color: orangered;
+  margin-left: 1%;
+  width: 15px;
+  height: 15px;
+  padding: 1px;
+}
+
+.remove-btn:hover{
+  background-color: maroon;
+  color: white;
+}
+
 /* ------------- NAVBAR ------------- */
 /* ------------- NAVBAR ------------- */
 /* ------------- NAVBAR ------------- */
@@ -59,6 +74,7 @@ nav {
   position: sticky;
   top: 0;
   overflow-x: scroll;
+  z-index: 10;
 }
 
 .nav-btn-container{
@@ -112,14 +128,6 @@ nav {
 /* ------------- HOMEPAGE ------------- */
 /* ------------- HOMEPAGE ------------- */
 
-.article-list {
-  padding-left: 5%;
-  padding-right: 5%;
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-}
-
 .hero {
   background-color: #0992a1;
   background-image: url("https://www.found.co.uk/wp-content/uploads/2017/04/filter-bubble-v2.png");
@@ -133,6 +141,10 @@ nav {
   position: relative;
 }
 
+.hero-text {
+  color: white;
+}
+
 .close-btn {
   position: absolute;
   top: 1%;
@@ -143,10 +155,51 @@ nav {
   color: lightgrey;
 }
 
+/* ------------- NEWS PROFILE PAGE ----------------- */
+/* ------------- NEWS PROFILE PAGE ----------------- */
+/* ------------- NEWS PROFILE PAGE ----------------- */
+
 .news-profile{
   background-color: white;
   min-height: 80vh;
-  padding: 10px;
+  padding: 2%;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.profile-options {
+  display: flex;
+  flex-direction: column;
+  padding: 5%;
+  box-shadow: 1px 1px 5px lightgrey;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.source-list {
+  margin: 1%;
+}
+
+.profile-title-box {
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+  margin: 2%;
+  border-bottom: 1px solid lightgrey;
+}
+
+.profile-name {
+  padding-bottom: 1%;
+  font-size: 8vh;
+  align-content: center;
+}
+
+.article-list {
+  padding-left: 5%;
+  padding-right: 5%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 
@@ -238,6 +291,12 @@ nav {
   line-height: 200%;
 }
 
+
+/* ------------- FOOTER ----------------- */
+/* ------------- FOOTER ----------------- */
+/* ------------- FOOTER ----------------- */
+
+
 .footer{
   height: 10vh;
   display: flex;
@@ -245,6 +304,10 @@ nav {
   padding-right:5%;
   align-items: center;
   border-top: 1px solid lightgrey;
+}
+
+.footer-link {
+  padding:1%;
 }
 
 /* ------------- ACCOUNT PAGE ----------------- */
