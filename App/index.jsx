@@ -15,23 +15,18 @@ import Hero from './components/Hero'
 
 import { Provider } from 'react-redux'
 import store from './store'
-import firebase, { google, auth, profilesById } from '~/fire'
+import firebase, { db, google, auth, profilesById } from '~/fire'
 
 export default class extends Component {
 
   state = {
     signedIn: null,
-    profiles: {a1:"Test-Profile1", a2:"Test-Profile2", a3:"Test-Profile3"},
+    profiles: {},
     displaySignUpBanner: true,
   }
 
   componentDidMount(){
-    // let sampleProfiles = []
-
-    // for(let i = 1; i<(Math.random()*9)+1; i++) {
-    //     sampleProfiles.push("ExampleLink"+i)
-    // }
-    // this.setState({profiles:sampleProfiles})
+    this.getProfiles()
     
     this.unsubscribe = auth.onAuthStateChanged(
       user => {
@@ -42,6 +37,15 @@ export default class extends Component {
   
   componentWillUnmount() {
     this.unsubscribe && this.unsubscribe()
+  }
+
+  getProfiles(){
+    db.collection('userProfiles').doc('Joyce Ren').collection('profiles').get()
+    .then(querySnap => {
+      querySnap.forEach(doc => this.setState({profiles: {[doc.id]: doc.data().profileName, ...this.state.profiles}}))
+      console.log(this.state)
+    })
+    .catch(console.error)
   }
   
   signOut = () => {

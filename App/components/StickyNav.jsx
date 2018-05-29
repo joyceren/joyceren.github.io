@@ -12,3 +12,5 @@ export default (props) => {
         </nav>
     )
 }
+
+// add an 'Add Profile Button'
