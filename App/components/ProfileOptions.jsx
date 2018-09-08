@@ -5,7 +5,7 @@ export default props => (
     <div>
       <h3>Your Sources:</h3>
       <div className="source-list">
-        {props.sources.map(source => 
+        {props.sources.map(source =>
           <div key={source}>
             {source}
             <button className="remove-btn" onClick={e => props.updateProfile({sources: props.sources.filter(s => s!==source)})}>
@@ -36,7 +36,6 @@ export default props => (
     <div>
       <input type='submit' value='update' onClick={e => {
           e.preventDefault()
-          console.log("clicked!")
       }}/>
     </div>
 
@@ -45,4 +44,3 @@ export default props => (
 
 
 // all sources here
-

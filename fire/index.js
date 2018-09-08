@@ -6,13 +6,13 @@ setup(firebase)
 
 export default firebase
 export const db = firebase.firestore()
+db.settings({timestampsInSnapshots: true})
 
 // authentication
 export const auth = firebase.auth()
 export const emailID = firebase.auth.EmailAuthProvider.PROVIDER_ID
 export const googleID = firebase.auth.GoogleAuthProvider.PROVIDER_ID
 export const google = new firebase.auth.GoogleAuthProvider()
-
 
 
 

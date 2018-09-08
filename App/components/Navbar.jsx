@@ -5,9 +5,6 @@ import userPic from '~/public/user-icon.png'
 
 const Navbar = props => {
 
-  // takes in props:
-  // signedIn
-
   if(!props) return null
   return (
     <nav>
@@ -19,13 +16,13 @@ const Navbar = props => {
         //signed in
           <div className="nav-btn-container">
             <Link to='/account' className='nav-btn login-btn'>account</Link>
-            <div className='nav-btn login-btn' onClick={props.signOut}>log out</div>
+            <Link to='/' className='nav-btn login-btn' onClick={props.signOut}>log out</Link>
           </div>
-        : 
+        :
         //not signed in
           <div className="nav-btn-container">
-            <Link to='/account/log-in' className='nav-btn login-btn'>log in</Link>
-            <Link to='/account' className='nav-btn signup-btn'>sign up</Link>
+            <div className='nav-btn login-btn' onClick={props.openSignIn}>log in</div>
+            <Link to='/account' className='nav-btn color-btn'>sign up</Link>
           </div>
       }
     </nav>
@@ -34,5 +31,3 @@ const Navbar = props => {
 
 
 export default Navbar
-
-

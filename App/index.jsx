@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
 import {Switch, Route, Redirect} from 'react-router'
-import {BrowserRouter as Router} from 'react-router-dom'
+import {BrowserRouter as Router, history} from 'react-router-dom'
 
 // Components
 import Navbar from './components/Navbar'
-import StickyNav from './components/StickyNav'
 import Article from './components/ArticlePage'
-import NewsProfile from './components/NewsProfile'
 import Account from'./components/Account'
 import Footer from './components/Footer'
 import Hero from './components/Hero'
-
+import StickyNav from './components/StickyNav'
+import NewsProfile from './components/NewsProfile'
+import Home from './components/Home'
+import Login from './components/Login'
 
 
 import { Provider } from 'react-redux'
@@ -21,65 +22,77 @@ export default class extends Component {
 
   state = {
     signedIn: null,
-    profiles: {},
-    displaySignUpBanner: true,
+    profiles: [],
+    openSignIn: false
   }
 
   componentDidMount(){
-    this.getProfiles()
-    
-    this.unsubscribe = auth.onAuthStateChanged(
-      user => {
-        this.setState({signedIn: !!user, displaySignUpBanner: !user})
+    this.unsubscribe = auth.onAuthStateChanged(user => {
+      if(user) {
+        this.setState({signedIn: !!user, uid: user.uid})
+        this.getProfiles(user.uid)
       }
-    )
+    })
   }
-  
+
+  getProfiles = (userId=this.state.uid) => {
+    db.collection('userProfiles').doc(userId).get()
+    .then(doc => {
+      if(doc.exists) this.setState(doc.data())
+    })
+  }
+
+  updateUserProfiles = (profileId, newProfileName) => {
+    const {profiles, uid} = this.state
+    const newProfiles = profiles.map(p => p.id==profileId ? {id: profileId, name: newProfileName} : p)
+
+    db.collection('userProfiles').doc(uid).set({profiles: newProfiles})
+    .then(res => this.setState({profiles: newProfiles}))
+    .catch(console.error)
+  }
+
+  addProfile = (id, name) => {
+    const profiles = [...this.state.profiles, {id, name}]
+    db.collection('userProfiles').doc(this.state.uid).set({profiles})
+    .then(res => this.setState({profiles}))
+    .catch(console.error)
+  }
+
   componentWillUnmount() {
     this.unsubscribe && this.unsubscribe()
   }
 
-  getProfiles(){
-    db.collection('userProfiles').doc('Joyce Ren').collection('profiles').get()
-    .then(querySnap => {
-      querySnap.forEach(doc => this.setState({profiles: {[doc.id]: doc.data().profileName, ...this.state.profiles}}))
-      console.log(this.state)
-    })
-    .catch(console.error)
-  }
-  
   signOut = () => {
     auth.signOut()
-    this.setState({signedIn: false})
-  }
-
-  signInWithGoogle = () => {
-    auth.signInWithPopup(google).catch(error => console.log(error.message))
+    this.setState({signedIn: false, uid: null})
   }
 
   render() {
+    const {signedIn, profiles, openSignIn} = this.state
     return (
-        <Router>
-          <div>
-            <Navbar signedIn={this.state.signedIn} signOut={this.signOut}/>
+      <Router>
+        <div>
+          {openSignIn ? <Login closeSignIn={() => this.setState({openSignIn: false})}/> : null}
+          <Navbar openSignIn={() => this.setState({openSignIn: true})} signedIn={signedIn} signOut={this.signOut}/>
+          {signedIn ? <StickyNav profiles={profiles}/> : <Hero />}
+          <Route exact path="/" component={Home}/>
+          <Route exact path='/profile/:profileId' render={props => (
+            <NewsProfile {...props} signedIn={signedIn} profiles={profiles} updateUserProfiles={this.updateUserProfiles} addProfile={this.addProfile}/>
+          )} />
+          <Route exact path="/account" component={Account} />
+          <Route exact path="/article/:articleId" component={Article} />
 
-            <Switch>
-              <Redirect from='/' to={"/"+Object.keys(this.state.profiles)[0]} exact={true}/>
-              <Route exact path='/:profileId' render={(p) => (
-                <div>
-                  {this.state.displaySignUpBanner ? <Hero close={() => this.setState({displaySignUpBanner:false})} /> : null }
-                  <StickyNav profiles={this.state.profiles} />
-                  <NewsProfile {...p} signedIn={this.state.signedIn} />
-                </div>
-              )} />
-              <Route exact path="/account/log-in" component={Account} />
-              <Route exact path="/article/:articleId" component={Article} />
-            </Switch>
-
-
-            <Footer />
-          </div>
-        </Router>
+          <Footer />
+        </div>
+      </Router>
     )
   }
 }
+
+
+//
+
+// {this.state.signedIn && this.state.profiles.length ?
+//   <Redirect from='/' to={'/'+this.state.profiles[0].id} exact={true}/>
+//   : <Route exact path='/' component={Home} />
+// }

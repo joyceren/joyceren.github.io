@@ -26,7 +26,6 @@ class ArticlePage extends Component {
   componentDidMount() {
     const {articleId} = this.props.match.params
     articleById(articleId).then(a => {
-      console.log(a)
       this.setState({
         url: a.url,
         content:this.parseArticle(a.url),
@@ -36,7 +35,6 @@ class ArticlePage extends Component {
   }
 
   render() {
-    console.log(this.state.parsed)
     if(!this.state) return null
     return (
       <div className='main'>
@@ -54,7 +52,7 @@ class ArticlePage extends Component {
               <option value="fox-news">Fox News</option>
             </select>
 
-            <div className="nav-btn signup-btn" onClick={() => {
+            <div className="nav-btn color-btn" onClick={() => {
                 const newSetting = this.state.revealSource=='none'? 'block':'none';
                 this.setState({revealSource: newSetting})
               }}>

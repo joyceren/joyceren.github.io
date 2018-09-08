@@ -1,64 +1,92 @@
 import React from 'react'
 import ProfileOptions from './ProfileOptions'
+import ArticleCard from './ArticleCard'
+
 import axios from 'axios'
+import {newsKey} from '~/keys'
 import {db} from '~/fire'
 
 export default class NewsProfile extends React.Component {
 
-  constructor() {
-    super()
-    this.updateProfile=this.updateProfile.bind(this)
-  }
-
   state = {
-    profileName: undefined,
-    sources: [],
     editMode:false,
+    articles: []
   }
 
   componentDidMount() {
-    this.getProfileInfo(this.props.match.params.profileId)
+    this.getProfile(this.props.match.params.profileId)
   }
 
   componentWillReceiveProps(nextProps) {
-    if(this.props !== nextProps) this.getProfileInfo(nextProps.match.params.profileId)
+    if(this.props.match.params.profileId !== nextProps.match.params.profileId) {
+      this.setState({editMode: false})
+      this.props = nextProps
+      this.getProfile(this.props.mnatch.params.profileId)
+    }
   }
 
-  getProfileInfo(profileId){
-    this.setState({profileId})
-    db.collection('userProfiles').doc('Joyce Ren').collection('profiles').doc(profileId).get()
+  getProfile = id => {
+    console.log('getting profile => ', id)
+    db.collection('profiles').doc(id).get()
     .then(doc => {
       if(doc.exists) {
-        this.setState(doc.data())
-        console.log(doc.data())
+        const profileOptions = doc.data()
+        this.setState(profileOptions)
+        profileOptions.sources.forEach(source => {
+          console.log('getting articles for ', source)
+          axios.get(`https://newsapi.org/v2/top-headlines?sources=${source}&apiKey=${newsKey}`)
+          .then(({data: {articles}}) => {
+            console.log(articles)
+            this.setState({
+              articles: [...this.state.articles, ...articles]
+            })
+          })
+        })
       }
-      else this.setState({profileName: "This profile doesn't exist!"})
+      else this.setState({name: "No profile found :("})
     })
-    .catch(console.error)
   }
 
-  updateProfile (newOptions) {
+  updateProfile = newOptions => {
     this.setState(newOptions)
-    db.collection('userProfiles').doc('Joyce Ren').collection('profiles').doc(this.state.profileId).set(newOptions, {merge:true})
+    db.collection('profiles').doc(this.props.match.params.profileId).set(newOptions, {merge:true})
     .catch(console.error)
   }
 
-
+  updateTitle = () => {
+    const newProfileName = this.state.name
+    const profileId = this.props.match.params.profileId
+    this.updateProfile({name: newProfileName})
+    this.props.updateUserProfiles(profileId, newProfileName)
+  }
 
   render() {
-    return (
-      <div className="news-profile">
-        <div className="profile-title-box">
-          
-      {this.state.editMode ? <input type="text" value={this.state.profileName} className="profile-name" onChange={(e) => {this.updateProfile({profileName: e.target.value})}}/> : <h1 className="profile-name">{this.state.profileName}</h1>}
+    // TODO:
+    // Add 'authored profiles to userProfiles'
+    // Only allow authored profiles to be editable
 
-          <h4 onClick={() => this.setState({editMode:!this.state.editMode})} className="close-btn">
-            {this.state.editMode ? "close" : "edit"}
-          </h4>
+    if(!this.state) return null
+    return (
+      <div className="profile-box">
+        <div className="profile-title-box">
+          {this.state.editMode ?
+            <input type="text" value={this.state.name} className="profile-name" onChange={e => this.setState({name:e.target.value}) } onBlur={this.updateTitle}/>
+            : <h1 className="profile-name">{this.state.name}</h1>
+          }
+          {
+            this.props.signedIn && this.props.profiles.some(e => e.id==this.props.match.params.profileId) ? (
+              <h4 onClick={() => this.setState({editMode:!this.state.editMode})} className="close-btn">
+                {this.state.editMode ? "close" : "edit"}
+              </h4>
+            )
+            : <div className="nav-btn color-btn" onClick={() => this.props.addProfile(this.props.match.params.profileId, this.state.name)}>
+                Add to your profiles
+              </div>
+          }
         </div>
-        { this.state.editMode ? <ProfileOptions sources={this.state.sources} updateProfile={this.updateProfile}/> : null }
+        { this.state.editMode && <ProfileOptions sources={this.state.sources} updateProfile={this.updateProfile}/>}
         <div className="article-list">
-          articles here!
+          {this.state.articles.length ? this.state.articles.map(a => <ArticleCard article={a}/>) : 'articles here!'}
         </div>
       </div>
     )

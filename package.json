@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "cd functions && npm install",
     "prepare": "firebase use --add && echo 'module.exports = firebase =>' > fire/setup.js && npx firebase setup:web >> fire/setup.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node dev",
@@ -24,11 +23,12 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
-    "firebase-tools": "^3.18.4",
+    "firebase-tools": "^4.2.1",
     "react-hot-loader": "^3.1.2",
     "strip-ansi": "^4.0.0",
     "through2": "^2.0.3",
     "webpack": "^3.8.1",
+    "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^2.9.4",
     "webpack-node-externals": "^1.6.0"
   },

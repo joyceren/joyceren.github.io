@@ -1,13 +1,13 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
 
-export default (props) => {
+export default ({profiles}) => {
 
     return (
         <nav className='sticky-nav'>
-            {Object.keys(props.profiles).map(profileId => (
-                <NavLink to={'/'+profileId} className='nav-btn' activeClassName="nav-selected" key={profileId}>
-                    {props.profiles[profileId]}
+            {profiles.map(p => (
+                <NavLink to={'/profile/'+p.id} className='nav-btn' activeClassName="nav-selected" key={p.id}>
+                    {p.name}
                 </NavLink>) ) }
         </nav>
     )
