@@ -10,9 +10,9 @@ Are you getting bummed out by politics and just want to switch to happy news for
 
 Well have I got the app for you!
 
-## Try this newsstand [here](filterbubble.news) at:
+## Try this newsstand [here](https://filterbubble.news) at:
 
-<filterbubble.news>
+<https://filterbubble.news>
 
 ## Tech-y Tech:
 
