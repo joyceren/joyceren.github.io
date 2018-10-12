@@ -296,6 +296,25 @@ nav {
   line-height: 200%;
 }
 
+.loading-pic-box {
+  display: flex;
+  justify-content: center;
+  padding: 10%;
+}
+
+.loading-pic {
+  max-height: 30vh;
+  align-self: center;
+  animation-name: loading-spin;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes loading-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 
 /* ------------- FOOTER ----------------- */
 /* ------------- FOOTER ----------------- */

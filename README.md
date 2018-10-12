@@ -36,4 +36,4 @@ It's kind of a pain in the ass to have to filter through the internet without th
 So eat your vegetables, folks, and exercise your brain a bit!
 
 ### Please don't read my blog:
-[website](joyceren.com)
+[website](https://joyceren.com)

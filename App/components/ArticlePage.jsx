@@ -3,10 +3,13 @@ import axios from 'axios'
 import {connect} from 'react-redux'
 import ReactHtmlParser from 'react-html-parser'
 import {articleById} from '~/fire'
+import loadingPic from '~/public/loading.png'
+import {mercuryAPIkey} from '~/keys'
 
 class ArticlePage extends Component {
   state = {
     revealSource: "none",
+    loading: true,
   }
 
   parseArticle(url) {
@@ -15,18 +18,20 @@ class ArticlePage extends Component {
         {
           headers: {
             'content-type': 'application/json',
-            'x-api-key': '7GjHxpveaOM0THd5BJpse5pL0v9QmdlWtoGEJygT'
+            'x-api-key': mercuryAPIkey
           }
         }
       )
     .then(res => res.data)
-    .then(parsed => {this.setState(parsed)})
+    .then(parsed => {
+      this.setState({loading: false})
+      this.setState(parsed)
+    })
   }
 
   componentDidMount() {
     const {articleId} = this.props.match.params
     articleById(articleId).then(a => {
-      console.log(articleId)
       this.setState({
         url: a.url,
         content:this.parseArticle(a.url),
@@ -37,6 +42,7 @@ class ArticlePage extends Component {
 
   render() {
     if(!this.state) return null
+    else if(this.state.loading) return <div className='loading-pic-box'><img src={loadingPic} className='loading-pic'/> </div>
     return (
       <div className='main'>
         <div className="article-page">
@@ -45,7 +51,7 @@ class ArticlePage extends Component {
           {this.state && ReactHtmlParser(this.state.content)}
 
           <div className="main">
-            What's the source?
+            {"What's the source?"}
             <select>
               <option value="">Choose a source</option>
               <option value="the-new-york-times">The New York Times</option>
