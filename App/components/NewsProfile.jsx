@@ -4,7 +4,7 @@ import ArticleCard from './ArticleCard'
 
 import axios from 'axios'
 import {newsKey} from '~/keys'
-import {db} from '~/fire'
+import {db, addArticles} from '~/fire'
 
 export default class NewsProfile extends React.Component {
 
@@ -32,18 +32,22 @@ export default class NewsProfile extends React.Component {
       if(doc.exists) {
         const profileOptions = doc.data()
         this.setState(profileOptions)
-        profileOptions.sources.forEach(source => {
-          console.log('getting articles for ', source)
-          axios.get(`https://newsapi.org/v2/top-headlines?sources=${source}&apiKey=${newsKey}`)
-          .then(({data: {articles}}) => {
-            console.log(articles)
-            this.setState({
-              articles: [...this.state.articles, ...articles]
-            })
-          })
-        })
+        this.getArticles(profileOptions.sources)
       }
       else this.setState({name: "No profile found :("})
+    })
+  }
+
+  getArticles = sources => {
+    sources.forEach(source => {
+      console.log('getting articles for ', source)
+      axios.get(`https://newsapi.org/v2/top-headlines?sources=${source}&apiKey=${newsKey}`)
+      .then(({data: {articles}}) => {
+        this.setState({
+          articles: [...this.state.articles, ...articles]
+        })
+        addArticles(articles)
+      })
     })
   }
 
@@ -86,7 +90,7 @@ export default class NewsProfile extends React.Component {
         </div>
         { this.state.editMode && <ProfileOptions sources={this.state.sources} updateProfile={this.updateProfile}/>}
         <div className="article-list">
-          {this.state.articles.length ? this.state.articles.map(a => <ArticleCard article={a}/>) : 'articles here!'}
+          {this.state.articles.length ? this.state.articles.map(a => <ArticleCard article={a} id={a.source.id+a.publishedAt}/>) : 'articles here!'}
         </div>
       </div>
     )

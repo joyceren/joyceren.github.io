@@ -133,7 +133,7 @@ nav {
   background-color: #0992a1;
   background-image: url("https://www.found.co.uk/wp-content/uploads/2017/04/filter-bubble-v2.png");
   background-size: cover;
-  height: 50vh;
+  height: 75vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -203,6 +203,10 @@ nav {
   flex-wrap: wrap;
 }
 
+.article-list-item {
+  border-top: 1px lightgrey solid;
+  padding: 5px;
+}
 
 /* ------------- LOGIN PAGE ----------------- */
 /* ------------- LOGIN PAGE ----------------- */

@@ -34,7 +34,7 @@ export const addProfile = (uid, profileName, newProfileObj) => {
 export const addArticles = articles => {
   console.log("adding articles")
   articles.forEach(article => {
-    const source = article.source.id || article.source.name
+    const source = article.source.id
     db.collection('articles').doc(source+article.publishedAt).set(article)
   })
 }

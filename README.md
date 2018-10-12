@@ -1,6 +1,6 @@
 # Taking back control of your news:
 
-Are you unhappy with how your online newsstands recommendations?
+Are you unhappy with your online newsstands recommendations?
 
 Do you feel like your online newsstands are encouraging your bad habits by continuously showing you click bait?
 
@@ -10,9 +10,9 @@ Are you getting bummed out by politics and just want to switch to happy news for
 
 Well have I got the app for you!
 
-## Try this newsstand [here](turn0ff.joyceren.com) at:
+## Try this newsstand [here](filterbubble.news) at:
 
-<turn0ff.joyceren.com>
+<filterbubble.news>
 
 ## Tech-y Tech:
 

@@ -26,6 +26,7 @@ class ArticlePage extends Component {
   componentDidMount() {
     const {articleId} = this.props.match.params
     articleById(articleId).then(a => {
+      console.log(articleId)
       this.setState({
         url: a.url,
         content:this.parseArticle(a.url),
